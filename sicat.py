@@ -4,17 +4,12 @@ from lib.vuln_packetstormsecurity import PacketStormSecurity
 from lib.module_msf import MsfModule
 from lib.cve_nvd import NvdDB
 from common.out_parse import Output
-from common.nmap_parse import NmapParse
 import argparse
 
 
 
 
 def main(args, keyword="", keyword_version=""):
-    if keyword == None or args.nmap == None:
-        pass
-    else:
-        Output.start(keyword, keyword_version)
 
     if args.exploitdb:
         if keyword_version != None:
@@ -70,7 +65,6 @@ if __name__ == "__main__":
     MsfModule = MsfModule()
     NvdDB = NvdDB()
     Output = Output()
-    NmapParse = NmapParse()
 
 
     # print banner
@@ -82,7 +76,6 @@ if __name__ == "__main__":
     # Add arguments
     parser.add_argument('-k','--keyword', type=str, help='File name or path to save the output')
     parser.add_argument('-kv','--keyword_version', type=str, help='File name or path to save the output')
-    parser.add_argument('-nm','--nmap', type=str, help='Identify via nmap output')
     parser.add_argument('--nvd', action='store_true', help='Use NVD as a source of information')
     parser.add_argument('--packetstorm', action='store_true', help='Use PacketStorm as a source of information')
     parser.add_argument('--exploitdb', action='store_true', help='Use ExploitDB as a source of information')
@@ -93,14 +86,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.nmap:
-        nmparse = NmapParse.parse(args.nmap)
-        if nmparse:
-            for service in nmparse:
-                main(args, service['service'], service['version'])
-        else:
-            print("[!] Only Supported for single host portscan result")
-    else:
-        keyword = args.keyword
-        keyword_version = args.keyword_version
-        main(args, keyword , keyword_version)
+
