@@ -25,7 +25,7 @@ SiCat's main strength lies in its ability to traverse both online and local reso
 ## Installation
 
 ``` bash
-git clone https://github.com/justakazh/sicat.git && cd sicat
+git clone https://github.com/creightonlewis/sicat.git && cd sicat
 
 pip  install  -r  requirements.txt
 
