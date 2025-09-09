@@ -6,9 +6,6 @@ from lib.cve_nvd import NvdDB
 from common.out_parse import Output
 import argparse
 
-
-
-
 def main(args, keyword="", keyword_version=""):
 
     if args.exploitdb:
